@@ -1,9 +1,13 @@
 import { DataItem } from "../utils/types";
 
 async function fetchHistory(): Promise<DataItem[] | null> {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`http://localhost:8000/api/search-history/`, {
       method: "GET",
+      headers: {
+        "Authorization": `token ${token}`,
+      },
     });
 
     if (!response.ok) {

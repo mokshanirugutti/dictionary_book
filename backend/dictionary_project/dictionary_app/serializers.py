@@ -8,6 +8,7 @@ class WordSerializer(serializers.ModelSerializer):
 
 class SearchHistorySerializer(serializers.ModelSerializer):
     word = WordSerializer()
+    user = serializers.ReadOnlyField(source='user.username') 
 
     class Meta:
         model = SearchHistory

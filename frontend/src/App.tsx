@@ -1,19 +1,27 @@
 import "./App.css";
-import HistoryBox from "./components/HistoryBox";
-
-import Searchbox from "./components/Searchbox";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./auth/Login";
+import { useAuth } from './auth/authProvider';
+import Register from "./auth/Register";
 
 function App() {
+  const { user, loading } = useAuth();
+
+  console.log('user in App:', user);
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a loading spinner
+  }
+
   return (
-    <div>
-      <h1 className="text-3xl  text-center m-10">Dictionary</h1>
-      
-      
-        <Searchbox />
-        <HistoryBox />
-      
-    
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,11 +1,15 @@
 import { MeanData }  from "../utils/types";
 
 async function fetchMeaning(word: string): Promise<MeanData | null> {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  
   try {
     const response = await fetch(`http://localhost:8000/api/words/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `token ${token}`,
       },
       body: JSON.stringify({ word }),
     });
@@ -19,6 +23,7 @@ async function fetchMeaning(word: string): Promise<MeanData | null> {
     const data = await response.json();
 
     return {
+      id : data.id,
       word: data.word,
       definition_data: data.definition_data,
     };
