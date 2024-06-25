@@ -83,8 +83,44 @@ This is a web application that allows users to search for words and get their de
    ```
 
 # API Endpoints
+## POST /api/register/ 
+### Description
+Create a new user account
 
-## POST /words/
+### Example Request
+    curl -X POST http://localhost:8000/api/words/ \
+    -H "Content-Type: application/json" \
+    -d '{
+    "username":"testuser1",
+    "password":"securepass1",
+    "email":"testuser1@gmail.com"
+    }'
+    
+### Example Response
+    {       
+        "message": "User registered successfully"
+    }
+
+## POST /api/login/ 
+### Description
+login a  user account return access token
+
+### Example Request
+    curl -X POST http://localhost:8000/api/login/ \
+    -H "Content-Type: application/json" \
+    -d '{
+    "username":"testuser1",
+    "password":"securepass1"
+    }'
+    
+### Example Response
+    {
+        "message": "Login successful",
+        "token": "$$$e50c6349d859520261e4de##########"
+    }
+
+
+## POST /api/words/
 
 ### Description
 
@@ -93,10 +129,10 @@ Returns meaning of word and adds entry into db
 ### Example Request
     curl -X POST http://localhost:8000/api/words/ \
     -H "Content-Type: application/json" \
+    -H "Authorization: Token $token" \
     -d '{
         "word": "example",
         }'
-    
 
 ### Example Response
 
@@ -109,11 +145,12 @@ Returns meaning of word and adds entry into db
             }
         }
 
-### GET /search-history/
-## Description
+## GET /api/search-history/
+### Description
 Get's previous search history
 ### Example Request
     curl -X GET http://localhost:8000/api/search-history/
+    -H "Authorization : token $token"
 
 ### Example Response
     [
@@ -157,17 +194,15 @@ Get's previous search history
         "search_timestamp": "2024-06-21T14:26:44.503583Z"
     }
 ]
-### DELETE /search-history/int:pk/
+## DELETE /api/search-history/int:pk/
 
-## Description
+### Description
 
 Delete a search history entry.
 
 ### Example Request
-
-```sh
-curl -X DELETE http://localhost:8000/api/search-history/1/
-```
+    curl -X DELETE http://localhost:8000/api/search-history/1/
+    -H "Authorization : token $token"
 
 ### Example Response
 
