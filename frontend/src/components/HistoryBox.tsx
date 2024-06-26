@@ -85,8 +85,11 @@ const HistoryBox: React.FC = () => {
           <div className='flex justify-center items-center'>
             <CircularProgress />
           </div>
-        ) : (
-          <List
+        ) : ( data && data.length === 0 ? (
+          <div className='flex justify-center items-center'>
+            No history
+          </div>
+        ) :( <List
             sx={{
               width: '100%',
               maxWidth: 360,
@@ -112,6 +115,7 @@ const HistoryBox: React.FC = () => {
               </li>
             ))}
           </List>
+        )
         )
       )}
       <WordPopup open={!!selectedWord} onClose={handleClosePopup} wordData={selectedWord} onDelete={handleDelete} />
