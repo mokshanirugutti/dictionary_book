@@ -1,11 +1,10 @@
 import { MeanData }  from "../utils/types";
-
+import { url } from "./useAuth";
 async function fetchMeaning(word: string): Promise<MeanData | null> {
   const token = localStorage.getItem("token");
-  console.log(token);
-  
+  // console.log(token);
   try {
-    const response = await fetch(`http://localhost:8000/api/words/`, {
+    const response = await fetch(`${url}/api/words/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

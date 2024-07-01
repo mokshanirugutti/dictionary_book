@@ -1,9 +1,9 @@
 import { DataItem } from "../utils/types";
-
+import { url } from "./useAuth";
 async function fetchHistory(): Promise<DataItem[] | null> {
   const token = localStorage.getItem("token");
   try {
-    const response = await fetch(`http://localhost:8000/api/search-history/`, {
+    const response = await fetch(`${url}/api/search-history/`, {
       method: "GET",
       headers: {
         "Authorization": `token ${token}`,

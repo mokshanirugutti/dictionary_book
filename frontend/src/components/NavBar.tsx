@@ -9,7 +9,6 @@ const NavBar : React.FC = () => {
     navigate("/login");
 
   };
-
   return (
     <div className=' flex items-center justify-between mt-2 pb-2 pr-4 pl-4 mb-10 border-b border-gray-800 shadow-md' >
         <div className='flex  gap-2'>

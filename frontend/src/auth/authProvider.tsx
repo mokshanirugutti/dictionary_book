@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { url } from '../hooks/useAuth';
 
 interface AuthContextType {
   user: string | null;
@@ -15,7 +16,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
-
+  
 
   useEffect(() => {
     // Check localStorage for a token on mount
@@ -30,7 +31,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const login = async (username: string, password: string, navigate: any) => {
-    const response = await fetch('http://localhost:8000/api/login/', {
+    const response = await fetch(`${url}/api/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
   const register = async (username: string,email:string, password: string, navigate: any) => {
-    const response = await fetch('http://localhost:8000/api/register/', {
+    const response = await fetch(`${url}/api/register/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

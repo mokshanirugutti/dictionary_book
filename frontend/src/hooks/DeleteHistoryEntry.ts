@@ -1,8 +1,8 @@
+import { url } from "./useAuth";
 const deleteHistoryEntry = async (id: number): Promise<string | null> => {
-  console.log(`id got is ${id}`);
-  
+  // console.log(`id got is ${id}`);
     try {
-      const response = await fetch(`http://localhost:8000/api/search-history/${id}/`, {
+      const response = await fetch(`${url}/api/search-history/${id}/`, {
         method: 'DELETE',
       });
       console.log('tried to delete history entry');
