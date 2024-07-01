@@ -76,21 +76,21 @@ class LoginView(View):
 
 class WordListCreate(APIView):
     def post(self, request: HttpRequest, *args, **kwargs):
-        print('post request came')
+        # print('post request came')
         try:
-            print('in try')
+            # print('in try')
             user = request.user
             if not user.is_authenticated:
                 return JsonResponse({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
 
-            print('got user')
+            # print('got user')
             data = request.data
             word_text = data.get('word')
-            print(f'got word {word_text}')
+            # print(f'got word {word_text}')
             if not word_text:
                 return JsonResponse({'error': 'Missing "word" field in request data'}, status=status.HTTP_400_BAD_REQUEST)
 
-            print(f"Request user: {user.username}")
+            # print(f"Request user: {user.username}")
 
             # Check if the word already exists
             word = Word.objects.filter(word=word_text).first()
