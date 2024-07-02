@@ -33,7 +33,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG') or False
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 # Parse the CORS_ALLOW_ALL_ORIGINS environment variable into a boolean
-CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS')
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
