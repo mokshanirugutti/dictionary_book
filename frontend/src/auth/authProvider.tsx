@@ -31,6 +31,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const login = async (username: string, password: string, navigate: any) => {
+    console.log(`hitting url ${url}`) 
     const response = await fetch(`${url}/api/login/`, {
       method: 'POST',
       headers: {
