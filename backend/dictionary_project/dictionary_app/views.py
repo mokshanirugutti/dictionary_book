@@ -1,6 +1,4 @@
-import json
 import logging
-from django.views import View 
 from rest_framework import status
 from django.utils import timezone
 from rest_framework import generics
@@ -8,71 +6,13 @@ from django.http import HttpRequest
 from .models import Word, SearchHistory
 from .utils import fetch_word_definition
 from rest_framework.views import APIView
-from django.contrib.auth.models import User
 from rest_framework.response import Response
 from django.http import HttpRequest, JsonResponse
-from rest_framework.authtoken.models import Token
 from django.core.exceptions import PermissionDenied
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import check_password
 from rest_framework.permissions import IsAuthenticated
 from .serializers import WordSerializer, SearchHistorySerializer
 
 logger = logging.getLogger(__name__)
-@method_decorator(csrf_exempt, name='dispatch')
-class RegisterView(View):
-    def post(self, request: HttpRequest, *args, **kwargs):
-        try:
-            data = json.loads(request.body)
-            username = data.get('username')
-            password = data.get('password')
-            email = data.get('email')
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-        
-        if not username or not password or not email:
-            return JsonResponse({'error': 'Missing required fields'}, status=400)
-
-        # Check if user already exists
-        if User.objects.filter(username=username).exists():
-            return JsonResponse({'error': 'Username already taken'}, status=400)
-        
-        # Create new user
-        user = User.objects.create(
-            username=username,
-            password=make_password(password),
-            email=email
-        )
-        
-        return JsonResponse({'message': 'User registered successfully'},status=200)
-    
-
-@method_decorator(csrf_exempt, name='dispatch')
-class LoginView(View):
-    def post(self, request: HttpRequest, *args, **kwargs):
-        try:
-            data = json.loads(request.body)
-            username = data.get('username')
-            password = data.get('password')
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-
-        if not username or not password:
-            return JsonResponse({'error': 'Missing required fields'}, status=400)
-        
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return JsonResponse({'error': 'Invalid credentials'}, status=400)
-        
-        if not check_password(password, user.password):
-            return JsonResponse({'error': 'Invalid credentials'}, status=400)
-
-        token, _ = Token.objects.get_or_create(user=user)
-        return JsonResponse({'message': 'Login successful', 'token': token.key})
-    
 
 class WordListCreate(APIView):
     def post(self, request: HttpRequest, *args, **kwargs):

@@ -24,7 +24,8 @@ const Register: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-      register(username,email, password, navigate);
+      register({username,email, password, navigate});
+      
     }
 
   return (

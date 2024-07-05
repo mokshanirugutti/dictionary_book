@@ -27,11 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG') or False
+DEBUG = False
 
 # Split the ALLOWED_HOSTS environment variable into a list
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',')
-
+# print('ALLOWED_HOSTS')
+# print(f'allowed hosts: %s' % ALLOWED_HOSTS)
 CORS_ALLOW_ALL_ORIGINS = True
 
 
@@ -147,3 +148,18 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+
+EMAIL_BACKEND = os.environ.get('DJANGO_EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST')
+EMAIL_PORT = os.environ.get('DJANGO_EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DJANGO_EMAIL_HOST_USER')
+# print(f'email_backend = {EMAIL_BACKEND}, '+
+#       f'email_host = {EMAIL_HOST}, '+
+#       f'email_port = {EMAIL_PORT}, '+
+#       f'email_host = {EMAIL_HOST_USER}, '+
+#       f'email_pass = {EMAIL_HOST_PASSWORD}, '+
+#       f'email_defa = {DEFAULT_FROM_EMAIL}, ' )

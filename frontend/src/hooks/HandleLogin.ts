@@ -1,7 +1,7 @@
 import { url } from "./useAuth";
 export const HandleLogin = async (username:string, password:string, nagivate:any) => {
-    console.log('trying to login');
-    console.log(`username = ${username} password = ${password}`);
+    // console.log('trying to login');
+    // console.log(`username = ${username} password = ${password}`);
     
     const response = await fetch(`${url}/api/login/`, {
         method: 'POST',
@@ -15,7 +15,7 @@ export const HandleLogin = async (username:string, password:string, nagivate:any
     });
     
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     if(data.error){
         console.error("login failed");

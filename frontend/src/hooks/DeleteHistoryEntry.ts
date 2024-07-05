@@ -5,7 +5,7 @@ const deleteHistoryEntry = async (id: number): Promise<string | null> => {
       const response = await fetch(`${url}/api/search-history/${id}/`, {
         method: 'DELETE',
       });
-      console.log('tried to delete history entry');
+      // console.log('tried to delete history entry');
       
   
       if (!response.ok) {

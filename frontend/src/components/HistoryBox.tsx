@@ -51,9 +51,9 @@ const HistoryBox: React.FC = () => {
   };
 
   const handleWordClick = (wordData: MeanData) => {
-    console.log('word data in handlewordclick');
+    // console.log('word data in handlewordclick');
     
-    console.log(wordData);
+    // console.log(wordData);
     
     setSelectedWord(wordData);
   };
