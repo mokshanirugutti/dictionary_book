@@ -30,11 +30,11 @@ const Register: React.FC = () => {
 
   return (
     <div className="grid justify-items-center content-center min-h-screen min-w-screen">
-      <div className="flex border rounded-xl p-10 bg-slate-300">
-        <div className="size-80 ">
-          <img src={book_desinged} alt="Open Book" />
+      <div className="flex border rounded-xl p-10 bg-slate-300 shadow-lg">
+        <div className="size-80 hidden md:flex">
+          <img src={book_desinged} alt="Open Book" className='rounded-l-lg '/>
         </div>
-        <div className="w-80 text-center bg-white flex flex-col border rounded-r-2xl ">
+        <div className="w-80 text-center bg-white flex flex-col border rounded-2xl md:rounded-r-2xl md:rounded-none">
           <h1 className="p-4">Register</h1>
           {errorMessage && (
             <div className="text-red-500 font-bold mb-4">{errorMessage}</div>
@@ -81,7 +81,7 @@ const Register: React.FC = () => {
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-48 ml-16" onClick={handleSubmit}>
             Register
           </button>
-          <p className="text-center text-slate-400 mt-4">
+          <p className="text-center text-slate-400 mt-2 mb-2">
             Already have an account? <a href="/login">Login</a>
           </p>
         </div>

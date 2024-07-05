@@ -73,7 +73,7 @@ const HistoryBox: React.FC = () => {
   const groupedData = data ? groupDataByTimestamp(data) : {};
 
   return (
-    <div className='w-1/6 m-4 mx-auto'>
+    <div className='w-1/2 md:w-1/4 m-4 mx-auto'>
       <div>
         History
         <IconButton onClick={handleToggle}>

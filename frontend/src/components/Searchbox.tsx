@@ -17,7 +17,7 @@ const Searchbox: React.FC = () => {
   };
   return (
     <div>
-      <label className="relative block w-1/4 mx-auto">
+      <label className="relative block w-1/2  md:w-1/4 mx-auto">
         <span className="sr-only">Search</span>
         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
           <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"></svg>
