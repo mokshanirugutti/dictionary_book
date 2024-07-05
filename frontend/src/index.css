@@ -5,3 +5,24 @@
 :root {
     background-color: rgb(229 229 229);
 }
+
+
+@layer utilities {
+    .underline-animation {
+      @apply inline-block relative ;
+    }
+  
+    .underline-animation::after {
+      content: '';
+      @apply absolute bottom-0 left-0 bg-[#4ca8d6d7] h-[2px];
+      width: 100%;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+  
+    .underline-animation:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }

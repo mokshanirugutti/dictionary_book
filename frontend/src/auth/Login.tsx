@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 
 const Login: React.FC = () => {
-  const { login , errorMessage,successMessage,HandleOtp } = useAuth();
+  const { login , errorMessage,successMessage } = useAuth();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState<string>("");
@@ -35,17 +35,17 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="grid justify-items-center content-center min-h-screen min-w-screen">
-      <div className="flex border rounded-xl p-10 bg-slate-300">
-        <div className="size-72 ">
-          <img src={book_desinged} alt="Open Book" />
+    <div className="grid justify-items-center content-center h-screen w-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 border rounded-2xl shadow-xl bg-white w-fit place-items-center">
+        <div className="size-80 hidden md:grid rounded-lg ml-3"> 
+          <img src={book_desinged} alt="Open Book" className='border rounded-lg' />
         </div>
-        <div className="w-80 text-center bg-white flex flex-col border rounded-r-2xl ">
-          <h1 className="p-3">Login</h1>
+        <div className="w-auto text-center  flex flex-col items-center   rounded-2xl md:rounded-r-2xl md:rounded-none md:-ml-7 p-5">
+          <h1 className="pt-5">Login</h1>
           
           <div className="border-black">
             <input
-              className="p-2 m-3 border rounded"
+              className="p-2 m-3 border rounded-md"
               type="text"
               placeholder="Username"
               name="username"
@@ -63,12 +63,13 @@ const Login: React.FC = () => {
               onChange={handleChange}
             />
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-48 ml-16" onClick={handleSubmit}>
+          <button className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-20 rounded w-auto" onClick={handleSubmit}>
             Login
           </button>
           <button className='text-sm mt-2' onClick={handleForgotPassword}>Forgot password </button>
-          <p className="text-center text-slate-400 mt-1">
-            Don't have an account? <a href="/register">Register</a>
+          <p className="text-center text-slate-400 mt-1 pb-5">
+            Don't have an account?
+            <a href="/register" className="underline-animation"> Register</a>
           </p>
         </div>
       </div>
