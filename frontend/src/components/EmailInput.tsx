@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,19 +7,11 @@ import { useAuth } from '../auth/authProvider';
 
 const EmailInput: React.FC = () => {
   const [email, setEmail] = useState('');
-  const { resetPasswordRequest, errorMessage,successMessage} = useAuth();
+  const { resetPasswordRequest} = useAuth();
   const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  useEffect(()=>{
-    if(errorMessage){
-      toast.error(errorMessage);
-    }
-    if (successMessage) {
-      toast.success(successMessage);
-    }
-  },[errorMessage,successMessage])
 
   const handleEmailSubmit = () => {
     if (!email || !email.includes('@')) {

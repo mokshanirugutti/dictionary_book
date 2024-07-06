@@ -16,21 +16,18 @@ const OTPValidation: React.FC<OTPValidationProps> = () => {
 
   const navigate = useNavigate();
   const [newpassword, setNewPassword] = useState('')
-  const {HandleOtp,errorMessage,successMessage} = useAuth();
+  const {HandleOtp,errorMessage,successMessage, resetPasswordRequest} = useAuth();
   const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
   const [timer, setTimer] = useState<number>(45);
   const [isResendEnabled, setIsResendEnabled] = useState<boolean>(false);
 
-  useEffect(() => {
-    // console.log(`email: ${email}, purpose: ${purpose}`);
-  }, [email, purpose]);
-  useEffect(() => {
-    if(errorMessage)
-      { toast.error(errorMessage); }
-    if(successMessage){
-      toast.success(successMessage);
-    }
-  },[errorMessage, successMessage]);
+  useEffect(() =>{
+      if(errorMessage){
+        toast.error(errorMessage)
+      }else if (successMessage){
+        toast.success((successMessage))
+      }
+  },[errorMessage,successMessage])
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -89,8 +86,7 @@ const OTPValidation: React.FC<OTPValidationProps> = () => {
     setOtp(Array(6).fill(''));
     setTimer(45);
     setIsResendEnabled(false);
-    toast.info('A new OTP has been sent to your email.');
-    // Handle OTP resend logic here
+    resetPasswordRequest({email,navigate});
   };
 
   return (

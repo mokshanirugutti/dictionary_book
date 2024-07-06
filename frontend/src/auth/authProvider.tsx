@@ -144,7 +144,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         state: { email: email, purpose: "verify-password-reset" },
       });
     }
-    
+
     
   };
   return (
