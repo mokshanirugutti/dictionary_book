@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import book_desinged from "../assets/book_desinged.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './authProvider';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const Login: React.FC = () => {

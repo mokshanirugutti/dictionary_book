@@ -83,6 +83,8 @@ This is a web application that allows users to search for words and get their de
    ```
 
 # API Endpoints
+## Test API endpoints with `Swagger` OpenAPI Spec 
+    visit /api/docs/
 ## POST /api/register/ 
 ### Description
 Create a new user account
