@@ -93,15 +93,17 @@ This project follows the OpenAPI 3.0.3 specification.
 
 ## Endpoints
 
+Here is the revised documentation with direct schema navigation links for better clarity:
+
 ### 1. `/api/login/`
 
 #### POST `/api/login/`
 
 Authenticate a user.
 
-- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `UserLogin` schema.
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in [`UserLogin`](#userlogin).
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns `UserLogin` schema in JSON format.
+- **Response**: Returns [`UserLogin`](#userlogin) schema in JSON format.
 
 ### 2. `/api/register/`
 
@@ -109,9 +111,9 @@ Authenticate a user.
 
 Register a new user.
 
-- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `UserCreation` schema.
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in [`UserCreation`](#usercreation).
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns `UserCreation` schema in JSON format.
+- **Response**: Returns [`UserCreation`](#usercreation) schema in JSON format.
 
 ### 3. `/api/request-password-reset/`
 
@@ -119,9 +121,9 @@ Register a new user.
 
 Request a password reset.
 
-- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `RequestPasswordReset` schema.
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in [`RequestPasswordReset`](#requestpasswordreset).
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns `RequestPasswordReset` schema in JSON format.
+- **Response**: Returns [`RequestPasswordReset`](#requestpasswordreset) schema in JSON format.
 
 ### 4. `/api/search-history/`
 
@@ -130,7 +132,7 @@ Request a password reset.
 Retrieve search history.
 
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns array of `SearchHistory` schema in JSON format.
+- **Response**: Returns array of [`SearchHistory`](#searchhistory) schema in JSON format.
 
 ### 5. `/api/search-history/{id}/`
 
@@ -148,9 +150,9 @@ Delete a search history entry.
 
 Verify and reset password.
 
-- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `VerifyPasswordReset` schema.
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in [`VerifyPasswordReset`](#verifypasswordreset).
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns `VerifyPasswordReset` schema in JSON format.
+- **Response**: Returns [`VerifyPasswordReset`](#verifypasswordreset) schema in JSON format.
 
 ### 7. `/api/verify-registration-otp/`
 
@@ -158,9 +160,9 @@ Verify and reset password.
 
 Verify registration OTP.
 
-- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `VerifyRegistration` schema.
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in [`VerifyRegistration`](#verifyregistration).
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns `VerifyRegistration` schema in JSON format.
+- **Response**: Returns [`VerifyRegistration`](#verifyregistration) schema in JSON format.
 
 ### 8. `/api/words/`
 
@@ -168,9 +170,9 @@ Verify registration OTP.
 
 Create a new word entry.
 
-- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `Word` schema.
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in [`Word`](#word).
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-- **Response**: Returns `Word` schema in JSON format.
+- **Response**: Returns [`Word`](#word) schema in JSON format.
 
 ### 9. `/api_schema/`
 
@@ -184,7 +186,7 @@ Retrieve OpenAPI schema.
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
 - **Response**: Returns OpenAPI schema in specified format.
 
-## Schemas
+# Schemas
 
 ### UserLogin
 
@@ -192,23 +194,24 @@ Retrieve OpenAPI schema.
   - `username` (string).
   - `password` (string).
 
-
 ### UserCreation
+
 - **Json Body**: 
   - `username` (string).
   - `password` (string).
   - `email` (email).
 
 ### RequestPasswordReset
+
 - **Json Body**: 
   - `email` (email).
-  
 
 ### SearchHistory
+
 - **Security**: Requires either `cookieAuth` or `tokenAuth`.
 
-
 ### VerifyPasswordReset
+
 - **Json Body**: 
   - `email` (email).
   - `otp` (6 digit otp).
@@ -221,11 +224,10 @@ Retrieve OpenAPI schema.
   - `otp` (6 digit otp).
 
 ### Word
+
 - **Json Body**: 
-    - `word` (string).
-    - **Security**: Requires either `cookieAuth` or `tokenAuth`.
-
-
+  - `word` (string).
+  - **Security**: Requires either `cookieAuth` or `tokenAuth`.
 ## Security Schemes
 
 ### cookieAuth
