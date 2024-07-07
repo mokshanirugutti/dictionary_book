@@ -82,134 +82,161 @@ This is a web application that allows users to search for words and get their de
    python manage.py runserver
    ```
 
-# API Endpoints
-## Test API endpoints with `Swagger` OpenAPI Spec 
-    visit /api/docs/
-## POST /api/register/ 
-### Description
-Create a new user account
 
-### Example Request
-    curl -X POST http://localhost:8000/api/words/ \
-    -H "Content-Type: application/json" \
-    -d '{
-    "username":"testuser1",
-    "password":"securepass1",
-    "email":"testuser1@gmail.com"
-    }'
-    
-### Example Response
-    {       
-        "message": "User registered successfully"
-    }
+# API Documentation
 
-## POST /api/login/ 
-### Description
-login a  user account return access token
+This document provides an overview of the RESTful API endpoints, request/response formats, and security schemes implemented in this project.
 
-### Example Request
-    curl -X POST http://localhost:8000/api/login/ \
-    -H "Content-Type: application/json" \
-    -d '{
-    "username":"testuser1",
-    "password":"securepass1"
-    }'
-    
-### Example Response
-    {
-        "message": "Login successful",
-        "token": "$$$e50c6349d859520261e4de##########"
-    }
+## OpenAPI Specification
 
+This project follows the OpenAPI 3.0.3 specification.
 
-## POST /api/words/
+## Endpoints
 
-### Description
+### 1. `/api/login/`
 
-Returns meaning of word and adds entry into db
+#### POST `/api/login/`
 
-### Example Request
-    curl -X POST http://localhost:8000/api/words/ \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Token $token" \
-    -d '{
-        "word": "example",
-        }'
+Authenticate a user.
 
-### Example Response
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `UserLogin` schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns `UserLogin` schema in JSON format.
 
-        {
-            "id": 1,
-            "word": "example",
-            "definition_data": {
-                "definition": "a representative form or pattern",
-                "examples": ["an example of good behavior"]
-            }
-        }
+### 2. `/api/register/`
 
-## GET /api/search-history/
-### Description
-Get's previous search history
-### Example Request
-    curl -X GET http://localhost:8000/api/search-history/
-    -H "Authorization : token $token"
+#### POST `/api/register/`
 
-### Example Response
-    [
-    {
-        "id": 3,
-        "word": {
-            "id": 2,
-            "word": "level",
-            "definition_data": {
-                "noun": {
-                    "definition": "A tool for finding whether a surface is level, or for creating a horizontal or vertical line of reference.",
-                    "example": "Hand me the level so I can tell if this is correctly installed."
-                },
-                "verb": {
-                    "definition": "To adjust so as to make as flat or perpendicular to the ground as possible.",
-                    "example": "You can level the table by turning the pads that screw into the feet."
-                },
-                "adjective": {
-                    "definition": "The same height at all places; parallel to a flat ground.",
-                    "example": "This table isn't quite level; see how this marble rolls off it?"
-                }
-            }
-        },
-        "search_timestamp": "2024-06-21T14:21:56.067566Z"
-    },
-    {
-        "id": 4,
-        "word": {
-            "id": 3,
-            "word": "history",
-            "definition_data": {
-                "noun": {
-                    "definition": "The aggregate of past events.",
-                    "example": "History repeats itself if we don’t learn from its mistakes."
-                },
-                "verb": {
-                    "definition": "To narrate or record."
-                }
-            }
-        },
-        "search_timestamp": "2024-06-21T14:26:44.503583Z"
-    }
-]
-## DELETE /api/search-history/int:pk/
+Register a new user.
 
-### Description
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `UserCreation` schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns `UserCreation` schema in JSON format.
+
+### 3. `/api/request-password-reset/`
+
+#### POST `/api/request-password-reset/`
+
+Request a password reset.
+
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `RequestPasswordReset` schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns `RequestPasswordReset` schema in JSON format.
+
+### 4. `/api/search-history/`
+
+#### GET `/api/search-history/`
+
+Retrieve search history.
+
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns array of `SearchHistory` schema in JSON format.
+
+### 5. `/api/search-history/{id}/`
+
+#### DELETE `/api/search-history/{id}/`
 
 Delete a search history entry.
 
-### Example Request
-    curl -X DELETE http://localhost:8000/api/search-history/1/
-    -H "Authorization : token $token"
+- **Path Parameter**: `id` (integer) - ID of the search history entry to delete.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: No response body (204 status).
 
-### Example Response
+### 6. `/api/verify-password-reset/`
 
-```sh
-{
-    "message": "History entry deleted"
-}
-```
+#### POST `/api/verify-password-reset/`
+
+Verify and reset password.
+
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `VerifyPasswordReset` schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns `VerifyPasswordReset` schema in JSON format.
+
+### 7. `/api/verify-registration-otp/`
+
+#### POST `/api/verify-registration-otp/`
+
+Verify registration OTP.
+
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `VerifyRegistration` schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns `VerifyRegistration` schema in JSON format.
+
+### 8. `/api/words/`
+
+#### POST `/api/words/`
+
+Create a new word entry.
+
+- **Request Body**: Accepts JSON, x-www-form-urlencoded, or multipart/form-data with fields defined in `Word` schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns `Word` schema in JSON format.
+
+### 9. `/api_schema/`
+
+#### GET `/api_schema/`
+
+Retrieve OpenAPI schema.
+
+- **Query Parameters**: 
+  - `format` (string): Format of the schema (json or yaml).
+  - `lang` (string): Language code for the schema.
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+- **Response**: Returns OpenAPI schema in specified format.
+
+## Schemas
+
+### UserLogin
+
+- **Json Body**: 
+  - `username` (string).
+  - `password` (string).
+
+
+### UserCreation
+- **Json Body**: 
+  - `username` (string).
+  - `password` (string).
+  - `email` (email).
+
+### RequestPasswordReset
+- **Json Body**: 
+  - `email` (email).
+  
+
+### SearchHistory
+- **Security**: Requires either `cookieAuth` or `tokenAuth`.
+
+
+### VerifyPasswordReset
+- **Json Body**: 
+  - `email` (email).
+  - `otp` (6 digit otp).
+  - `new_password` (string).
+
+### VerifyRegistration
+
+- **Json Body**: 
+  - `email` (email).
+  - `otp` (6 digit otp).
+
+### Word
+- **Json Body**: 
+    - `word` (string).
+    - **Security**: Requires either `cookieAuth` or `tokenAuth`.
+
+
+## Security Schemes
+
+### cookieAuth
+
+- **Type**: API Key
+- **Location**: Cookie
+- **Name**: sessionid
+
+### tokenAuth
+
+- **Type**: API Key
+- **Location**: Header
+- **Name**: Authorization
+- **Description**: Token-based authentication with required prefix "Token"
