@@ -3,6 +3,7 @@ import book_desinged from "../assets/book_desinged.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './authProvider';
 import { toast } from 'react-toastify';
+import ClickWaitButton from '../components/ClickWaitButton';
 
 
 const Login: React.FC = () => {
@@ -63,9 +64,12 @@ const Login: React.FC = () => {
               onChange={handleChange}
             />
           </div>
-          <button className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-20 rounded w-auto" onClick={handleSubmit}>
+          {/* <button className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-20 rounded w-auto" onClick={handleSubmit}>
             Login
-          </button>
+          </button> */}
+          {/* <div onClick={handleSubmit}> */}
+          <ClickWaitButton title='login' next={handleSubmit}/>
+          {/* </div> */}
           <button className='text-sm mt-2' onClick={handleForgotPassword}>Forgot password </button>
           <p className="text-center text-slate-400 mt-1 pb-5">
             Don't have an account?
