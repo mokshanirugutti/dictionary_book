@@ -73,7 +73,7 @@ const Login: React.FC = () => {
           <button className='text-sm mt-2' onClick={handleForgotPassword}>Forgot password </button>
           <p className="text-center text-slate-400 mt-1 pb-5">
             Don't have an account?
-            <a href="/register" className="underline-animation"> Register</a>
+            <a href="/register" className="underline-animation ml-2"> Register</a>
           </p>
         </div>
       </div>

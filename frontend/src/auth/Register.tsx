@@ -3,6 +3,7 @@ import book_desinged from "../assets/book_desinged.png";
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './authProvider';
+import ClickWaitButton from '../components/ClickWaitButton';
 
 const Register: React.FC = () => {
   const { register , errorMessage } = useAuth();
@@ -30,12 +31,12 @@ const Register: React.FC = () => {
 
   return (
     <div className="grid justify-items-center content-center min-h-screen min-w-screen">
-      <div className="flex border rounded-xl p-10 bg-slate-300 shadow-lg">
-        <div className="size-80 hidden md:flex">
-          <img src={book_desinged} alt="Open Book" className='rounded-l-lg '/>
+      <div className="flex  bg-white rounded-md">
+        <div className="size-80 hidden md:flex p-2">
+          <img src={book_desinged} alt="Open Book" className='rounded-lg '/>
         </div>
-        <div className="w-80 text-center bg-white flex flex-col border rounded-2xl md:rounded-r-2xl md:rounded-none">
-          <h1 className="p-4">Register</h1>
+        <div className="w-80 text-center  flex flex-col justify-center items-center  rounded-2xl md:rounded-r-2xl md:rounded-none">
+          <h1 className="p-4 text-xl font-bold tracking-wide">Register</h1>
           {errorMessage && (
             <div className="text-red-500 font-bold mb-4">{errorMessage}</div>
           )}
@@ -67,9 +68,7 @@ const Register: React.FC = () => {
             />{error && (
                 <div className="text-red-500 font-bold">{error}</div>
               )}
-          </div>
-          <div className="border-black">
-            <input
+              <input
               className="p-2 m-2 border rounded"
               type="password"
               placeholder="Password"
@@ -77,12 +76,19 @@ const Register: React.FC = () => {
               value={password}
               onChange={handleChange}
             />
-          </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-48 ml-16" onClick={handleSubmit}>
+          
+          {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-48 ml-16" onClick={handleSubmit}>
             Register
-          </button>
+          </button> */}
+          
+          </div>
+          <div>
+          <ClickWaitButton title='Register' next ={handleSubmit} />
+            
+          </div>
           <p className="text-center text-slate-400 mt-2 mb-2">
-            Already have an account? <a href="/login">Login</a>
+            Already have an account? 
+            <a href="/login" className="underline-animation ml-2">Login</a>
           </p>
         </div>
       </div>

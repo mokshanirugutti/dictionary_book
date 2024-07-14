@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/authProvider';
+import ClickWaitButton from './ClickWaitButton';
 
 const EmailInput: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,19 +29,16 @@ const EmailInput: React.FC = () => {
         <div className="mb-6 mx-10 border border-gray-500 rounded-lg">
           <AccountCircleIcon className="mr-2" />
           <input
-            className="p-2 mx-2 w-72"
+            className="p-2 mx-2 w-72 focus:outline-none focus:ring-0"
             type="text"
             placeholder="Email"
             value={email}
             onChange={handleChange}
           />
         </div>
-        <button
-          onClick={handleEmailSubmit}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Submit
-        </button>
+        <div className="flex justify-center">
+          <ClickWaitButton title='Submit' next={handleEmailSubmit} />
+        </div>
       </div>
       <ToastContainer />
     </div>
