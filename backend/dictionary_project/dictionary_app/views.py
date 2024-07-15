@@ -10,12 +10,12 @@ from rest_framework.response import Response
 from django.http import HttpRequest, JsonResponse
 from django.core.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
-from .serializers import WordSerializer, SearchHistorySerializer
+from .serializers import WordSerializer, SearchHistorySerializer,SearchWordSerializer
 
 logger = logging.getLogger(__name__)
 
 class WordListCreate(APIView):
-    serializer_class = WordSerializer
+    serializer_class = SearchWordSerializer
     def post(self, request: HttpRequest, *args, **kwargs):
         # print('post request came')
         try:

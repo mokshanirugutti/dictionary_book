@@ -7,11 +7,21 @@ from django.contrib.auth.models import User
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = '__all__'
+        fields =  '__all__'
+
+class SearchWordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Word
+        fields =  ['word']
+        
+class SearchWordHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Word
+        fields =  ['word', 'definition_data']
 
 
 class SearchHistorySerializer(serializers.ModelSerializer):
-    word = WordSerializer()
+    word = SearchWordHistorySerializer()
     user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
