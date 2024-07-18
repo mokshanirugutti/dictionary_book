@@ -13,6 +13,98 @@ This is a web application that allows users to search for words and get their de
 - **Back-end**: Django, Django REST Framework
 - **Database**: PostgreSQL
 
+## Setup Instructions using Docker
+
+
+## Prerequisites
+
+Ensure you have the following installed on your local machine:
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Local Setup
+
+Follow these steps to set up and run the project locally:
+
+### 1. Clone the Repository
+
+Clone the repository to your local machine:
+
+```sh
+git clone https://github.com/mokshanirugutti/dictionary_book.git
+cd dictionary_book
+```
+
+> [!IMPORTANT]
+> Make these changes for backend in **setting.py** during development
+> 
+> Change `DEBUG = True`
+> 
+> comment out
+> 
+> ```
+> 'OPTIONS': {
+>            'sslmode': 'require',
+>       },
+> ```
+>  at DATABASES .
+
+
+### 2. Build and Start the Services
+
+Use Docker Compose to build and start the frontend, backend, and database services:
+
+```sh
+docker-compose up --build
+```
+
+This command will build the Docker images for the frontend and backend, start the services, and initialize the PostgreSQL database.
+
+### 3. Verify Service Status
+
+After the services are up and running, you can check their status and see where they are running by executing:
+
+```sh
+docker-compose ps
+```
+
+### 4. Access the Application
+
+- **Frontend**: Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to access the React frontend.
+- **Backend**: The Django backend is accessible via [http://localhost:8000](http://localhost:8000). This endpoint will be used by the frontend to interact with the backend service.
+
+### 5. Stopping the Services
+
+To stop the services, run:
+
+```sh
+docker-compose down
+```
+
+This command stops and removes the containers but leaves the volumes intact.
+
+### 6. Running Backend Migrations
+
+If you need to apply database migrations manually, you can execute:
+
+```sh
+docker-compose exec backend python manage.py migrate
+```
+
+This will apply any pending migrations to the PostgreSQL database.
+
+### Troubleshooting
+
+- **Backend Exits Immediately**: Ensure the `start.sh` script is correctly configured and executable. Check the logs with `docker-compose logs backend` for any errors.
+- **Frontend Not Loading**: Ensure that the frontend service is correctly building and running. Check the logs with `docker-compose logs frontend` if needed.
+
+## Development
+
+To make changes to the code, edit the files in the `frontend` or `backend` directories. Docker Compose will automatically reflect these changes without needing to rebuild the images, thanks to the volume mounts specified in `docker-compose.yml`.
+
+
+
 ## Setup Instructions
 
 ### Prerequisites

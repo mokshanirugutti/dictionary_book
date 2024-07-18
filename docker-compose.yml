@@ -2,8 +2,42 @@ version: '3.8'
 
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend/dictionary_project
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/dictionary_project:/app
+    depends_on:
+      - db
+    env_file:
+      - ./backend/dictionary_project/.env
+    command: ["sh", "./start.sh"]
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: dictionary
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
